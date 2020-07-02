@@ -24,11 +24,12 @@ def test_should_construct_loan():
 
 def test_should_not_construct_loan():
     with pytest.raises(ValidationException,
-                       match='Erros: Nome inválido, CPF inválido, Valor ' +
-                       'desejado inválido, Quantidade de parcelas inválidas'):
+                       match='Erros: Nome inválido, CPF inválido, ' +
+                       'Data de nascimento inválida, Valor desejado ' +
+                       'inválido, Quantidade de parcelas inválidas'):
         name = ''
         cpf = ''
-        birthdate = 'date.today()'
+        birthdate = ''
         amount = 999
         terms = 5
         income = 1000

@@ -22,7 +22,7 @@ class Loan:
             errors.append('Nome inválido')
         if not self.cpf:
             errors.append('CPF inválido')
-        if isinstance(self.birthdate, datetime.datetime):
+        if not isinstance(self.birthdate, datetime.date):
             errors.append('Data de nascimento inválida')
         if self.amount < 1000.0 or self.amount > 4000.0:
             errors.append('Valor desejado inválido')
