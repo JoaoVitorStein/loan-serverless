@@ -1,14 +1,17 @@
 import json
 from src.exceptions.validation_exception import ValidationException
-from src.use_cases.create_loan_use_case import create_loan_use_case_instace
+from src.handlers.app import create_loan_use_case_instace
 from src.domains.loan import Loan
+import datetime
 
 
 def create_loan(event, context):
     try:
         data = json.loads(event['body'])
+        birthdate = datetime.datetime.strptime(
+                data.get('birthdate'), '%Y-%m-%d') if 'birthdate' in data else None
         loan = Loan(data.get('name', ''), data.get('cpf', ''),
-                    data.get('birthdate', ''), data.get('amount', 0),
+                    birthdate, data.get('amount', 0),
                     data.get('terms', 0), data.get('income', ''))
         create_loan_use_case_instace.execute(loan)
         body = {'id': loan.id}

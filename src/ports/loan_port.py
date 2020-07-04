@@ -1,4 +1,3 @@
-from src.adapters.dynamodb_loan_adapter import dynamodb_adapter_instace
 from src.domains.loan import Loan
 
 
@@ -7,8 +6,10 @@ class LoanPort:
     def __init__(self, adapter):
         self.adapter = adapter
 
-    def create(self, item: Loan):
-        self.adapter.create(item)
+    def save(self, item: Loan):
+        self.adapter.save(item)
 
-
-loan_port_instance = LoanPort(dynamodb_adapter_instace)
+    def get_by_id(self, id) -> Loan:
+        loan = self.adapter.get_by_id(id)
+        print(loan.__dict__)
+        return loan

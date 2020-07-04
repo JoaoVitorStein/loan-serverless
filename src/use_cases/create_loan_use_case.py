@@ -1,12 +1,10 @@
-from src.ports.loan_port import loan_port_instance
+from src.ports.loan_port import LoanPort
+from src.domains.loan import Loan
 
 
 class CreateLoanUseCase:
-    def __init__(self, loan_port):
+    def __init__(self, loan_port: LoanPort):
         self.loan_port = loan_port
 
-    def execute(self, loan):
-        return self.loan_port.create(loan)
-
-
-create_loan_use_case_instace = CreateLoanUseCase(loan_port_instance)
+    def execute(self, loan: Loan):
+        self.loan_port.save(loan)

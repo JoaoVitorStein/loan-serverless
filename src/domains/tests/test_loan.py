@@ -19,13 +19,16 @@ def test_should_construct_loan():
     assert amount == loan.amount
     assert terms == loan.terms
     assert income == loan.income
+    assert 'processing' == loan.status
+    assert None is loan.refused_policy
+    assert None is loan.result
     UUID(hex=loan.id, version=4)
 
 
 def test_should_not_construct_loan():
     with pytest.raises(ValidationException,
                        match='Erros: Nome inválido, CPF inválido, ' +
-                       'Data de nascimento inválida, Valor desejado ' +
+                       'Data de nascimento inválida, Valor ' +
                        'inválido, Quantidade de parcelas inválidas'):
         name = ''
         cpf = ''
